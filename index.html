@@ -452,7 +452,7 @@
     color: var(--forest);
     font-weight: 500;
   }
-  .form-input, .form-textarea {
+  .form-input, .form-textarea, select.form-input {
     background: var(--cream);
     border: 1px solid rgba(45,61,40,0.2);
     padding: 0.75rem 1rem;
@@ -462,6 +462,8 @@
     outline: none;
     transition: border-color 0.3s;
     width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
   }
   .form-input:focus, .form-textarea:focus {
     border-color: var(--sage);
@@ -891,62 +893,93 @@
         <div class="form-success" id="formSuccess">
           Thank you for reaching out! I'll get back to you as soon as possible. Looking forward to connecting! 🌿
         </div>
-        <div class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xnjwyjnk" method="POST">
+
           <div class="form-group">
-            <label class="form-label" for="emailInput">Your Email Address</label>
-            <input class="form-input" type="email" id="emailInput" placeholder="you@example.com" required>
+            <label class="form-label" for="name">Your Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Enter your full name" required>
           </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Your Email Address</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+
           <div class="form-group">
             <label class="form-label">What services are you looking for?</label>
             <div class="services-grid">
               <label class="service-option">
-                <input type="checkbox" value="Administrative Support">
+                <input type="checkbox" name="services" value="Administrative Support">
                 <span class="service-checkbox"></span>
                 <span class="service-text">Administrative Support</span>
               </label>
               <label class="service-option">
-                <input type="checkbox" value="Social Media Management">
+                <input type="checkbox" name="services" value="Social Media Management">
                 <span class="service-checkbox"></span>
                 <span class="service-text">Social Media Management</span>
               </label>
               <label class="service-option">
-                <input type="checkbox" value="Graphic Design Assistance">
+                <input type="checkbox" name="services" value="Graphic Design Assistance">
                 <span class="service-checkbox"></span>
                 <span class="service-text">Graphic Design Assistance</span>
               </label>
               <label class="service-option">
-                <input type="checkbox" value="Project Management">
+                <input type="checkbox" name="services" value="Project Management">
                 <span class="service-checkbox"></span>
                 <span class="service-text">Project Management</span>
               </label>
               <label class="service-option">
-                <input type="checkbox" value="Calendar & Email Management">
+                <input type="checkbox" name="services" value="Calendar & Email Management">
                 <span class="service-checkbox"></span>
                 <span class="service-text">Calendar &amp; Email Management</span>
               </label>
               <label class="service-option">
-                <input type="checkbox" value="Content Scheduling">
+                <input type="checkbox" name="services" value="Content Scheduling">
                 <span class="service-checkbox"></span>
                 <span class="service-text">Content Scheduling</span>
               </label>
               <label class="service-option">
-                <input type="checkbox" value="Client Communication & Coordination">
+                <input type="checkbox" name="services" value="Client Communication & Coordination">
                 <span class="service-checkbox"></span>
                 <span class="service-text">Client Communication &amp; Coordination</span>
               </label>
               <label class="service-option">
-                <input type="checkbox" value="Research & Data Organization">
+                <input type="checkbox" name="services" value="Research & Data Organization">
                 <span class="service-checkbox"></span>
                 <span class="service-text">Research &amp; Data Organization</span>
               </label>
             </div>
           </div>
+
           <div class="form-group">
-            <label class="form-label" for="messageInput">Anything else you'd like to share? (optional)</label>
-            <textarea class="form-textarea" id="messageInput" placeholder="Tell me a bit about your project or what you need help with..."></textarea>
+            <label class="form-label" for="project">Project Details</label>
+            <textarea class="form-textarea" id="project" name="project_details" rows="6" placeholder="Tell me a bit about your project, business, or the kind of support you're looking for..." required></textarea>
           </div>
-          <button class="form-submit" onclick="submitForm()">Send Message</button>
-        </div>
+
+          <div class="form-group">
+            <label class="form-label" for="start-date">Preferred Start Date <span style="font-weight:300;color:var(--muted)">(Optional)</span></label>
+            <input class="form-input" type="date" id="start-date" name="preferred_start_date">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="hours">Estimated Hours Needed Per Week <span style="font-weight:300;color:var(--muted)">(Optional)</span></label>
+            <select class="form-input" id="hours" name="estimated_hours">
+              <option value="">Select an option</option>
+              <option>Less than 5 hours</option>
+              <option>5–10 hours</option>
+              <option>10–20 hours</option>
+              <option>20+ hours</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="notes">Anything else you'd like to share? <span style="font-weight:300;color:var(--muted)">(Optional)</span></label>
+            <textarea class="form-textarea" id="notes" name="additional_notes" rows="4" placeholder="Additional details..."></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Send Inquiry</button>
+
+        </form>
       </div>
 
       <!-- BOOKING CALENDAR -->
@@ -957,7 +990,7 @@
             <div class="calendar-icon">📅</div>
             <p class="calendar-title">Book a Discovery Call</p>
             <p class="calendar-desc">Let's find a time that works for both of us! Click below to view my availability and book a free discovery call.</p>
-            <a href="https://calendar.app.google/CEz65Qq6p8tZ5ZUr9" target="_blank" class="calendar-btn">View My Calendar & Book a Call</a>
+            <a href="https://calendar.app.google/P4YGEqnx5AbUwSy6A" target="_blank" class="calendar-btn">View My Calendar & Book a Call</a>
           </div>
         </div>
       </div>
@@ -992,29 +1025,6 @@
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-  // Form submit
-  function submitForm() {
-    const email = document.getElementById('emailInput').value.trim();
-    const checked = [...document.querySelectorAll('.contact-form input[type="checkbox"]:checked')].map(c => c.value);
-    const message = document.getElementById('messageInput').value.trim();
-
-    if (!email) { alert('Please enter your email address.'); return; }
-    if (!email.includes('@')) { alert('Please enter a valid email address.'); return; }
-    if (checked.length === 0) { alert('Please select at least one service.'); return; }
-
-    const subject = encodeURIComponent('Portfolio Inquiry: ' + checked.join(', '));
-    const body = encodeURIComponent(
-      'Hi Maricon,\n\nI found your portfolio and I\'m interested in the following services:\n' +
-      checked.map(s => '  - ' + s).join('\n') +
-      (message ? '\n\nAdditional notes:\n' + message : '') +
-      '\n\nReply to: ' + email
-    );
-
-    window.location.href = 'mailto:mariconmabueg@gmail.com?subject=' + subject + '&body=' + body;
-
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  }
 </script>
 </body>
 </html>
